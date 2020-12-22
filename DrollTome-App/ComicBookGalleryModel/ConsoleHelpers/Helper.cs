@@ -8,10 +8,10 @@ namespace ComicBookGalleryModel.ConsoleHelpers
 {
     public static class Helper
     {
-        public static string ReadInput(string prompt, bool forceToLowerCase)
+        public static string ReadInput(string prompt, bool forceToLowerCase = false)
         {
             Console.WriteLine();
-            Console.WriteLine(prompt);
+            Console.Write(prompt);
             string input = Console.ReadLine();
             return forceToLowerCase ? input.ToLower() : input;
         }
@@ -23,28 +23,26 @@ namespace ComicBookGalleryModel.ConsoleHelpers
 
         public static void Output(string message)
         {
-            Console.WriteLine(message);
+            Console.Write(message);
         }
 
         public static void Output(string format, params object[] args)
         {
-            Console.WriteLine(format, args);
-            Console.WriteLine();
+            Console.Write(format, args);
         }
 
         public static void OutputLine(string message, bool outputBlankLine)
         {
             if (outputBlankLine)
             {
-                Console.WriteLine(message);
+                Console.WriteLine();
             }
-            Console.WriteLine();
+            Console.WriteLine(message);
         }
 
         public static void OutputLine(string format, params object[] args)
         {
             Console.WriteLine(format, args);
-            Console.WriteLine();
         }
 
         public static void OutputBlankLine()

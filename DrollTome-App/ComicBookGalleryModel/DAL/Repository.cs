@@ -63,10 +63,10 @@ namespace ComicBookGalleryModel.DAL
 
         public static Series GetSeries(int seriesId)
         {
-            using(Context context = new Context())
+            using(Context context = GetContext())
             {
                 return context.Series
-                    .Include(s => s.Id == seriesId)
+                    .Where(s => s.Id == seriesId)
                     .SingleOrDefault();
             }
         }
