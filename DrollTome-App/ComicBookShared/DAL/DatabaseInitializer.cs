@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComicBookShared
+namespace ComicBookShared.DAL
 {
     internal class DatabaseInitializer
         : DropCreateDatabaseIfModelChanges<Context>

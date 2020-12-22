@@ -7,15 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComicBookShared
+namespace ComicBookShared.DAL
 {
     public class Context : DbContext
     {
-        public Context()
-        {
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Context>());
-            Database.SetInitializer(new DatabaseInitializer());
-        }
+        
         public DbSet<ComicBook> ComicBooks { get; set; }
         public DbSet<Series> Series { get; set; }
         public DbSet<Artist> Artists { get; set; }
