@@ -1,4 +1,4 @@
-﻿using ComicBookGalleryModel.Models;
+﻿using ComicBookShared.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComicBookGalleryModel
+namespace ComicBookShared
 {
     internal class DatabaseInitializer
         : DropCreateDatabaseIfModelChanges<Context>

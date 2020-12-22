@@ -1,6 +1,6 @@
 ﻿using ComicBookGalleryModel.ConsoleHelpers;
-using ComicBookGalleryModel.DAL;
-using ComicBookGalleryModel.Models;
+using ComicBookShared.DAL;
+using ComicBookShared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
