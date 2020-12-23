@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\ComicBookArtistRepository.cs" />
+    <Compile Include="DAL\ComicBookRepository.cs" />
     <Compile Include="DAL\Context.cs" />
     <Compile Include="DAL\DatabaseInitializer.cs" />
     <Compile Include="DAL\Repository.cs" />

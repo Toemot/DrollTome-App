@@ -10,13 +10,13 @@ namespace ComicBookLibManWebApp.Controllers
     public abstract class BaseController : Controller
     {
         protected Repository Repository { get; private set; }
-        private Context _context = null;
+        protected Context Context { get; private set; }
         private bool _disposed = false;
 
         public BaseController()
         {
-            _context = new Context();
-            Repository = new Repository(_context);
+            Context = new Context();
+            Repository = new Repository(Context);
         }
 
 
@@ -28,7 +28,7 @@ namespace ComicBookLibManWebApp.Controllers
             }
             if (disposing)
             {
-                _context.Dispose();
+                Context.Dispose();
             }
             disposing = true;
             base.Dispose(disposing);
