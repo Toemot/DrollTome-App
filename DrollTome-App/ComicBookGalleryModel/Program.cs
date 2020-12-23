@@ -1,5 +1,5 @@
 ﻿using ComicBookGalleryModel.ConsoleHelpers;
-using ComicBookShared.DAL;
+using ComicBookGalleryModel.DAL;
 using ComicBookShared.Models;
 using System;
 using System.Collections.Generic;
