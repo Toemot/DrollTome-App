@@ -1,10 +1,12 @@
-﻿using ComicBookShared.Models;
+﻿using ComicBookShared.DAL;
+using ComicBookShared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace ComicBookLibraryManagerWebApp.Controllers
 {
@@ -13,10 +15,19 @@ namespace ComicBookLibraryManagerWebApp.Controllers
     /// </summary>
     public class ArtistsController : Controller
     {
+        private Context _context;
+        private ArtistRepository _artistRepository;
+
+        public ArtistsController()
+        {
+            _context = new Context();
+            _artistRepository = new ArtistRepository(_context);
+        }
+
         public ActionResult Index()
         {
             // TODO Get the artists list.
-            var artists = new List<Artist>();
+            var artists = _artistRepository.GetList();
 
             return View(artists);
         }
@@ -29,7 +40,7 @@ namespace ComicBookLibraryManagerWebApp.Controllers
             }
 
             // TODO Get the artist.
-            var artist = new Artist();
+            var artist = _artistRepository.Get(id.Value);
 
             if (artist == null)
             {
@@ -60,6 +71,7 @@ namespace ComicBookLibraryManagerWebApp.Controllers
             if (ModelState.IsValid)
             {
                 // TODO Add the artist.
+                _artistRepository.Add(artist);
 
                 TempData["Message"] = "Your artist was successfully added!";
 
@@ -77,7 +89,7 @@ namespace ComicBookLibraryManagerWebApp.Controllers
             }
 
             // TODO Get the artist.
-            var artist = new Artist();
+            var artist = _artistRepository.Get(id.Value);
 
             if (artist == null)
             {
@@ -95,6 +107,7 @@ namespace ComicBookLibraryManagerWebApp.Controllers
             if (ModelState.IsValid)
             {
                 // TODO Update the artist.
+                _artistRepository.Update(artist);
 
                 TempData["Message"] = "Your artist was successfully updated!";
 
@@ -112,7 +125,7 @@ namespace ComicBookLibraryManagerWebApp.Controllers
             }
 
             // TODO Get the artist.
-            var artist = new Artist();
+            var artist = _artistRepository.Get(id.Value);
 
             if (artist == null)
             {
@@ -126,6 +139,7 @@ namespace ComicBookLibraryManagerWebApp.Controllers
         public ActionResult Delete(int id)
         {
             // TODO Delete the artist.
+            _artistRepository.Delete(id);
 
             TempData["Message"] = "Your artist was successfully deleted!";
 
@@ -139,17 +153,17 @@ namespace ComicBookLibraryManagerWebApp.Controllers
         /// <param name="artist">The artist to validate.</param>
         private void ValidateArtist(Artist artist)
         {
-            //// If there aren't any "Name" field validation errors...
-            //if (ModelState.IsValidField("Name"))
-            //{
-            //    // Then make sure that the provided name is unique.
-            //    // TODO Call method to check if the artist name is available.
-            //    if (false)
-            //    {
-            //        ModelState.AddModelError("Name",
-            //            "The provided Name is in use by another artist.");
-            //    }
-            //}
+            // If there aren't any "Name" field validation errors...
+            if (ModelState.IsValidField("Name"))
+            {
+                // Then make sure that the provided name is unique.
+                // TODO Call method to check if the artist name is available.
+                if (_artistRepository.ArtistNameExists(artist.Id, artist.Name))
+                {
+                    ModelState.AddModelError("Name",
+                        "The provided Name is in use by another artist.");
+                }
+            }
         }
     }
 }
